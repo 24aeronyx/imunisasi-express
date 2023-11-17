@@ -20,12 +20,12 @@ class Vaksin {
 
   async insertVaksin() {
     let sql = "CALL insertVaksin(?, ?, ?)";
-    const [newVaksin, _] = await db.execute(sql, [
+    const [newVaksin] = await db.execute(sql, [
       this.name,
       this.category,
       this.stock,
     ]);
-    return newVaksin;
+    return newVaksin[0];
   }
 
   static deleteVaksin() {
