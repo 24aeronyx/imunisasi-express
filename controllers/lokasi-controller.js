@@ -59,7 +59,9 @@ exports.insertLokasi = async (req, res, next) => {
 exports.deleteLokasi = async (req, res, next) => {
   try {
     const [result, _] = await Lokasi.deleteAllLokasi();
-    res.status(200).json({ message: "All Lokasi deleted successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "All Lokasi deleted successfully", data: result });
   } catch (error) {
     next(error);
   }
@@ -71,9 +73,8 @@ exports.deleteLokasiById = async (req, res, next) => {
     if (!id) {
       return res.status(400).json({ message: "ID parameter is required" });
     }
-    const [result, _] = await Lokasi.deleteLokasiById(id);
-    // Tidak perlu mengambil elemen pertama dari array hasil jika tidak ada data yang dikembalikan
-    res.status(200).json({ message: "Lokasi deleted successfully", data: result });
+    await Lokasi.deleteLokasiById(id);
+    res.status(200).json({ message: "Lokasi deleted successfully" });
   } catch (error) {
     next(error);
   }
