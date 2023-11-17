@@ -11,20 +11,17 @@ class Pasien {
 
   static selectPasien() {
     let sql = "CALL selectPasien();";
-
     return db.execute(sql);
   }
 
   static selectPasienById(id) {
     let sql = "CALL selectPasienById(?);";
-
     return db.execute(sql, [id]);
   }
 
   async insertPasien() {
     let sql = "CALL insertPasien(?, ?, ?, ?, ?)";
-
-    const [newPasien, _] = await db.execute(sql, [
+    const [newPasien] = await db.execute(sql, [
       this.name,
       this.birth,
       this.phone,
@@ -32,7 +29,33 @@ class Pasien {
       this.city,
     ]);
 
-    return newPasien;
+    return newPasien[0]; // Mengembalikan objek hasil insert, bukan array
+  }
+
+  static deletePasien() {
+    let sql = "CALL deletePasien();";
+    return db.execute(sql);
+  }
+
+  static deletePasienById(id) {
+    let sql = "CALL deletePasienById(?);";
+    return db.execute(sql, [id]);
+  }
+
+  static updatePasienById(id, { name, birth, phone, address, city }) {
+    let sql = "CALL updatePasienById(?, ?, ?, ?, ?, ?);";
+
+    // Gantilah nilai undefined dengan null
+    const params = [
+      id,
+      name || null,
+      birth || null,
+      phone || null,
+      address || null,
+      city || null,
+    ];
+
+    return db.execute(sql, params);
   }
 }
 

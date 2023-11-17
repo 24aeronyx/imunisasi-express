@@ -6,6 +6,7 @@ const app = express()
 app.use(express.json())
 
 app.use('/pasien', require('./routes/pasien-route'))
+app.use('/vaksin', require('./routes/vaksin-route'))
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

@@ -1,9 +1,17 @@
-const express = require('express');
-const pasienController = require('../controllers/pasien-controller');
+const express = require("express");
+const pasienController = require("../controllers/pasien-controller");
 const router = express.Router();
 
-router.get('/', pasienController.selectPasien);
-router.get('/:id', pasienController.selectPasienById);
-router.post('/', pasienController.insertPasien);
+router
+  .route("/")
+  .get(pasienController.selectPasien)
+  .post(pasienController.insertPasien)
+  .delete(pasienController.deletePasien);
+
+router
+  .route("/:id")
+  .get(pasienController.selectPasienById)
+  .delete(pasienController.deletePasienById)
+  .put(pasienController.updatePasienById);
 
 module.exports = router;
