@@ -7,15 +7,10 @@ app.use(express.json())
 
 app.use('/pasien', require('./routes/pasien-route'))
 
-app.use((err,req,res,next) =>{
-    console.log(error.stack)
-    console.log(error.name)
-    console.log(error.code)
-
-    res.status(500).json({
-        message: "Something went wrong"
-    })
-})
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+  });
 
 const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {
