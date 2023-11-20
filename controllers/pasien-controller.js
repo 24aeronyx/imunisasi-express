@@ -4,7 +4,6 @@ exports.selectPasien = async (req, res, next) => {
   try {
     const [pasienArray, _] = await Pasien.selectPasien();
 
-    // Mengambil elemen pertama dari array hasil
     const pasien = pasienArray[0];
 
     res.status(200).json({ pasien });
@@ -23,7 +22,6 @@ exports.selectPasienById = async (req, res, next) => {
 
     const [pasienArray, _] = await Pasien.selectPasienById(id);
 
-    // Mengambil elemen pertama dari array hasil
     const pasien = pasienArray[0];
 
     if (!pasien || pasien.length === 0) {
@@ -86,7 +84,6 @@ exports.updatePasienById = async (req, res, next) => {
       return res.status(400).json({ message: "ID parameter is required" });
     }
 
-    // Buat objek yang hanya berisi kolom-kolom yang ingin diupdate
     const updateData = {
       name: p_name || null,
       birth: p_birth || null,

@@ -29,7 +29,7 @@ class Pasien {
       this.city,
     ]);
 
-    return newPasien[0]; // Mengembalikan objek hasil insert, bukan array
+    return newPasien[0]; 
   }
 
   static deletePasien() {
@@ -45,7 +45,6 @@ class Pasien {
   static updatePasienById(id, { name, birth, phone, address, city }) {
     let sql = "CALL updatePasienById(?, ?, ?, ?, ?, ?);";
 
-    // Gantilah nilai undefined dengan null
     const params = [
       id,
       name || null,
